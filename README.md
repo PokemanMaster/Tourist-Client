@@ -21,6 +21,7 @@ npm run start
 项目运行后启动在 3000 端口
 项目支持移动端（推荐）和PC端
 模拟了选择商品、地址到下单全部流程
+测试测试测试测试测试测试测试测试测试
 
 ## 图片展示
 
@@ -46,7 +47,7 @@ npm run start
 
 收藏
 
-![favorite](./public/img/favorite.png)
+![favorite](./public/img/favorites.png)
 
 订单
 
