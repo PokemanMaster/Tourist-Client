@@ -23,6 +23,7 @@ npm run start
 模拟了选择商品、地址到下单全部流程
 项目的后端地址: https://github.com/PokemanMaster/tourist-server
 
+ee
 ## 图片展示
 
 首页
