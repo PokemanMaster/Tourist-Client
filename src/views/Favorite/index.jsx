@@ -43,7 +43,7 @@ export default function Favorite() {
                 {/*收藏*/}
                 <div className={AA.Favorite}>
                     <div className={AA.Products}>
-                        {Favorites.length > 0 ? (
+                        {Favorites && Favorites.length > 0 ? (
                             Favorites.map((item) => (
                                 <Col xs={12} sm={8} md={6} lg={4} xl={4} key={item.id}>
                                     <div

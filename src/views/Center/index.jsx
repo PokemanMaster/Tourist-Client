@@ -13,10 +13,14 @@ export default function Center() {
 
     useEffect(() => {
         ListOrdersAPI().then(res => {
-            setOrderNum(res.data.items.length)
+            if (res.data.items > 0) {
+                setOrderNum(res.data.items.length)
+            }
         })
         ShowFavoritesAPI().then(res => {
-            setFavoritesNum(res.data.items.length)
+            if (res.data.items > 0) {
+                setOrderNum(res.data.items.length)
+            }
         })
     }, [])
 
