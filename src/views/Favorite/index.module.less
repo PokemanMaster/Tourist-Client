@@ -93,34 +93,44 @@
       }
     }
   }
+  //空白
+  .EmptyCart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 20vh auto;
+
+
+    .EmptyCartImg {
+      height: 5.7rem;
+      width: 5.7rem;
+    }
+
+    .EmptyCartText1 {
+      font-size: 1.7rem;
+      color: #666;
+      padding: .7rem 0;
+    }
+
+    .EmptyCartText2 {
+      color: #888;
+      font-size: .7rem;
+      margin-bottom: .7rem;
+    }
+  }
 }
 
-//空白
-.EmptyCart {
+// 用户没登陆显示
+.Empty {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100%;
-  margin: 20vh auto;
-  
-
-  .EmptyCartImg {
-    height: 5.7rem;
-    width: 5.7rem;
-  }
-
-  .EmptyCartText1 {
-    font-size: 1.7rem;
-    color: #666;
-    padding: .7rem 0;
-  }
-
-  .EmptyCartText2 {
-    color: #888;
-    font-size: .7rem;
-    margin-bottom: .7rem;
-  }
+  align-items: center;
+  height: 100vh;
+  padding-bottom: 10vh;
 }
+
+
 
 

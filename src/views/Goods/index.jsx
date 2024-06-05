@@ -7,6 +7,7 @@ import {ListProductsAPI,} from "../../api/products";
 import {ListCategoriesAPI} from "../../api/categories"
 import {SearchProductsAPI} from "../../api/products"
 import {ListRankingAPI} from "../../api/ranking";
+import {Link as MuiLink} from "@mui/material";
 
 // 商品分类页
 export default function Goods() {
@@ -37,12 +38,12 @@ export default function Goods() {
 
     // 排行榜
     const [activeTab, setActiveTab] = useState(0);
-    const GetRanking = () =>{
-        ListRankingAPI().then(res=> {
+    const GetRanking = () => {
+        ListRankingAPI().then(res => {
             setActiveTab(1)
             setListCategoriesSelect(999)
             setListProducts(res.data)
-        }).catch(err=> {
+        }).catch(err => {
             console.log(err)
         })
     }
@@ -137,6 +138,13 @@ export default function Goods() {
                     ) : null}
                 </Row>
             </div>
+            <Row style={{textAlign: 'center'}}>
+                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                    <MuiLink href="https://beian.miit.gov.cn/" underline="none" style={{color: "#333"}}>
+                        桂ICP备2023004200号-2
+                    </MuiLink>
+                </Col>
+            </Row>
         </>
     );
 }

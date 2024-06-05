@@ -1,7 +1,12 @@
 import request from '../index'
 
-const UserId = JSON.parse(localStorage.getItem("user")).id;
+let UserId = '';
+const user = JSON.parse(localStorage.getItem("user"));
 const token = localStorage.getItem("token");
+
+if (user && user.id) {
+    UserId = user.id;
+}
 
 const api = {
     CreateFavorite: "api/v1/favorites", // 创建收藏夹

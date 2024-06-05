@@ -116,4 +116,11 @@
   font-size: 0.7rem;
   margin-bottom: 0.7rem;
 }
+.Empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding-bottom: 10vh;
+}
 /*# sourceMappingURL=index.module.css.map */

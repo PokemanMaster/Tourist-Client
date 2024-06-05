@@ -1,10 +1,9 @@
-import React, {lazy, useEffect} from 'react';
+import React, {lazy} from 'react';
 import {Navigate} from "react-router-dom";
 import LayoutView from "../layout";
-import {UserTokenAPI} from "../api/users";
 
 const About = lazy(() => import("../views/About"));
-const CallbackQQ = lazy(() => import("../views/CallbackQQ"));
+// const CallbackQQ = lazy(() => import("../views/CallbackQQ"));
 const Cart = lazy(() => import("../views/Cart"));
 const Center = lazy(() => import("../views/Center"));
 const ConfirmOrder = lazy(() => import("../views/ConfirmOrder"));
@@ -18,7 +17,7 @@ const OrderDetails = lazy(() => import("../views/OrderDetails"));
 const Register = lazy(() => import("../views/Register"));
 const UserAddress = lazy(() => import("../views/UserAddress"));
 const UserDetails = lazy(() => import("../views/UserDetails"));
-const UserPass = lazy(() => import("../views/UserPass"));
+// const UserPass = lazy(() => import("../views/UserPass"));
 
 
 // 懒加载组件加载时的 Loading 界面
@@ -73,10 +72,10 @@ const router = [
                         path: "details",
                         element: withLoadingComponent(<UserDetails/>)
                     },
-                    {
-                        path: "pass",
-                        element: withLoadingComponent(<UserPass/>)
-                    },
+                    // {
+                    //     path: "pass",
+                    //     element: withLoadingComponent(<UserPass/>)
+                    // },
                     {
                         path: "address",
                         element: withLoadingComponent(<UserAddress/>)
@@ -111,7 +110,7 @@ const router = [
     },
     {
         path: "*",
-        element: <Navigate to="/login"/>
+        element: <Navigate to="/layout/home"/>
     }
 ];
 

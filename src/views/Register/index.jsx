@@ -122,7 +122,7 @@ export default function Register() {
         <div className={s.body}>
             <Row justify="center" align="top">
                 <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                    <h1>AA鱼豆腐旅游网</h1>
+                    <h1>模拟商城旅游网</h1>
                 </Col>
                 <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                     <p>心态特好&nbsp;&nbsp;&nbsp;从不摆烂</p>
@@ -141,7 +141,7 @@ export default function Register() {
                 <Col xs={18} sm={16} md={12} lg={8} xl={6}>
                     <FormControl variant="standard" style={{width: '100%'}}>
                         <InputLabel htmlFor="standard-adornment-password"
-                                    style={{color: '#3E3F4C'}}>nickname</InputLabel>
+                                    style={{color: '#3E3F4C'}}>昵称</InputLabel>
                         <Input
                             id="standard-adornment-nickname"
                             value={nickname}
@@ -157,7 +157,7 @@ export default function Register() {
                 <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
                 <Col xs={18} sm={16} md={12} lg={8} xl={6}>
                     <FormControl variant="standard" style={{width: '100%'}}>
-                        <InputLabel htmlFor="standard-adornment-password" style={{color: '#3E3F4C'}}>name</InputLabel>
+                        <InputLabel htmlFor="standard-adornment-password" style={{color: '#3E3F4C'}}>用户名</InputLabel>
                         <Input
                             id="standard-adornment-name"
                             value={name}
@@ -175,7 +175,7 @@ export default function Register() {
                 <Col xs={18} sm={16} md={12} lg={8} xl={6}>
                     <FormControl variant="standard" style={{width: '100%'}}>
                         <InputLabel htmlFor="standard-adornment-password"
-                                    style={{color: '#3E3F4C'}}>Password</InputLabel>
+                                    style={{color: '#3E3F4C'}}>密码</InputLabel>
                         <Input
                             id="standard-adornment-password"
                             value={password}
@@ -204,7 +204,8 @@ export default function Register() {
                 <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
                 <Col xs={18} sm={16} md={12} lg={8} xl={6}>
                     <FormControl sx={{display: 'flex', flexDirection: 'row', width: '100%'}} variant="standard">
-                        <InputLabel htmlFor="standard-code" style={{color: '#3E3F4C'}}>code</InputLabel>
+                        <InputLabel htmlFor="standard-code"
+                                    style={{color: '#3E3F4C', paddingTop: '7px'}}>验证码</InputLabel>
                         <Input
                             id="standard-code"
                             value={code}
@@ -231,33 +232,23 @@ export default function Register() {
             {/*遗忘处理*/}
             <Row style={{textAlign: 'center'}}>
                 <Col xs={6} sm={6} md={6} lg={8} xl={10} style={{textAlign: 'right'}}>
-                    <div>账号申诉</div>
                 </Col>
                 <Col xs={12} sm={12} md={12} lg={8} xl={4}>
-                    <div>忘记密码</div>
                 </Col>
-                <Col xs={6} sm={6} md={6} lg={8} xl={10} style={{textAlign: 'left'}}>
-                    <div onClick={toLogin}>点击注册</div>
+                <Col xs={6} sm={6} md={6} lg={8} xl={10} style={{textAlign: 'left', cursor: 'pointer'}}>
+                    <div
+                        style={{
+                            color: 'blue',
+                            fontWeight: '700',
+                            fontSize: '18px' // 你可以根据需要调整大小
+                        }}
+                        onClick={toLogin}
+                    >
+                        点击登录
+                    </div>
                 </Col>
             </Row>
 
-            <Row>
-                <Col xs={7} sm={8} md={9} lg={10} xl={11} style={{textAlign: 'right'}}>
-                    <MuiLink href="https://beian.miit.gov.cn/" underline="none" style={{color: "#333"}}>
-                        帮助
-                    </MuiLink>
-                </Col>
-                <Col xs={10} sm={8} md={6} lg={4} xl={2} style={{textAlign: 'center'}}>
-                    <MuiLink href="https://beian.miit.gov.cn/" underline="none" style={{color: "#333"}}>
-                        隐私
-                    </MuiLink>
-                </Col>
-                <Col xs={7} sm={8} md={9} lg={10} xl={11} style={{textAlign: 'left'}}>
-                    <MuiLink href="https://beian.miit.gov.cn/" underline="none" style={{color: "#333"}}>
-                        条款
-                    </MuiLink>
-                </Col>
-            </Row>
             <Row style={{textAlign: 'center'}}>
                 <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                     <MuiLink href="https://beian.miit.gov.cn/" underline="none" style={{color: "#333"}}>

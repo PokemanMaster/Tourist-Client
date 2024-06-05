@@ -5,6 +5,7 @@ import {ListCarouselsAPI} from "../../api/carousels";
 import shop1 from '../../public/images/shop1.jpg';
 import shop2 from '../../public/images/shop2.jpg';
 import {useNavigate} from "react-router-dom";
+import {Link as MuiLink} from "@mui/material";
 
 // 商品的首页
 export default function Home() {
@@ -38,7 +39,9 @@ export default function Home() {
                     <h2>Revamp Your Wardrobe Today</h2>
                     <h3>Uncover the latest trends and timeless pieces at your doorstep in
                         Chiyoda, 13. Perfect finds for every style.</h3>
-                    <button className={AA.button} onClick={()=> {navigateTo("/layout/goods")}}>
+                    <button className={AA.button} onClick={() => {
+                        navigateTo("/layout/goods")
+                    }}>
                         Shop Now
                     </button>
                 </Col>
@@ -100,7 +103,9 @@ export default function Home() {
                     <h2>Revamp Your Wardrobe Today</h2>
                     <h3>Uncover the latest trends and timeless pieces at your doorstep in
                         Chiyoda, 13. Perfect finds for every style.</h3>
-                    <button className={AA.button} onClick={()=> {navigateTo("/layout/goods")}}>
+                    <button className={AA.button} onClick={() => {
+                        navigateTo("/layout/goods")
+                    }}>
                         Shop Now
                     </button>
                 </Col>
@@ -115,6 +120,13 @@ export default function Home() {
                                      alt=""/>
                             </div>))) : null}
                     </Carousel>
+                </Col>
+            </Row>
+            <Row style={{textAlign: 'center'}}>
+                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                    <MuiLink href="https://beian.miit.gov.cn/" underline="none" style={{color: "#333"}}>
+                        桂ICP备2023004200号-2
+                    </MuiLink>
                 </Col>
             </Row>
         </div>

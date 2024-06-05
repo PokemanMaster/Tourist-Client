@@ -1,15 +1,16 @@
 import S from './index.module.css'
-import {Button, Drawer, Form, Input, Modal} from "antd";
+import {Button, Drawer, Empty, Form, Input, Modal} from "antd";
 import React, {useEffect, useState} from "react";
 import {CreateAddressAPI, DeleteAddressAPI, ShowAddressesAPI, UpdateAddressAPI} from "../../api/addresses";
 import emptyCart from "../../public/images/cart_empty.png"
 import {Link} from "@mui/joy";
 import clogo from "../../public/images/clogo.png";
 import {cityData} from "../../data/city";
+import {useNavigate} from "react-router-dom";
 
 export default function UserAddress() {
-    const user = JSON.parse(localStorage.getItem("user")); // 获取用户数据
-    const UserId = user ? user.id : null; // 检查用户数据是否存在
+    const navigateTo = useNavigate();
+    const [UserInfo] = useState(JSON.parse(localStorage.getItem("user")));
     const [form] = Form.useForm();
 
     // 展示收货地址信息
@@ -19,7 +20,6 @@ export default function UserAddress() {
             console.log("展示收货地址信息", res)
             setShowAddresses(res.data)
         }).catch(err => {
-            console.log(err)
         });
     }, [])
 
@@ -29,7 +29,6 @@ export default function UserAddress() {
             .then(res => {
                 console.log("删除收货地址", res)
             }).catch(err => {
-            console.log(err)
         })
         window.location.reload();
     }
@@ -49,7 +48,7 @@ export default function UserAddress() {
             const addressValue = drawerValue + '-' + detailsValue;
             // 添加收货地址
             CreateAddressAPI({
-                "user_id": UserId, "name": addressesValue, "phone": telephoneValue, "address": addressValue
+                "user_id": UserInfo.id, "name": addressesValue, "phone": telephoneValue, "address": addressValue
             }).then(res => {
                 console.log("添加收货地址", res)
             }).catch(err => {
@@ -80,7 +79,7 @@ export default function UserAddress() {
             const addressValue = drawerValue + '-' + detailsValue;
             // 添加收货地址
             UpdateAddressAPI({
-                "user_id": UserId,
+                "user_id": UserInfo.id,
                 "id": UpdateAddressId,
                 "name": addressesValue,
                 "phone": telephoneValue,
@@ -145,47 +144,60 @@ export default function UserAddress() {
     }
 
     return (<>
-        <div className={S.body}>
-            {/*头部*/}
-            <div className={S.TopHeader}>
-                <div className={S.CartHeader}>
-                    <div className={S.Logo}>
-                        <Link to="/">
-                            <img src={clogo} alt=""/>
-                        </Link>
-                    </div>
-                    <div className={S.CartHeaderContent}>
-                        <p>我的地址</p>
-                    </div>
-                </div>
-            </div>
-
-            <div className={S.address}>
-                {ShowAddresses ? (ShowAddresses.map((item) => (<div className={S.addressItem} key={item.id}>
-                    <div className={S.itemProfile}>
-                        <span>{item.name}&nbsp;,</span>
-                        <span className={S.itemTelephone}>{item.phone}</span>
-                        <span className={S.itemDelete} onClick={() => delectAddress(item.id)}>X</span>
-
-                        <p>{item.address}</p>
-                    </div>
-                    <div className={S.itemButton}>
-                        <div className={S.default}></div>
-                        <div className={S.selectButton}>
-                            <Button className={S.updateButton}
-                                    onClick={() => UpdateAddressModal(true, item.id, item.name, item.phone)}
-                                    type="primary">修改</Button>
+        {UserInfo ? <div className={S.body}>
+                {/*头部*/}
+                <div className={S.TopHeader}>
+                    <div className={S.CartHeader}>
+                        <div className={S.Logo}>
+                            <Link to="/">
+                                <img src={clogo} alt=""/>
+                            </Link>
+                        </div>
+                        <div className={S.CartHeaderContent}>
+                            <p>我的地址</p>
                         </div>
                     </div>
-                </div>))) : <div className={S.EmptyCart}>
-                    {/* 此处的图片不能直接写路径，只能通过import的方式将它引入进来 */}
-                    <img src={emptyCart} alt="" className={S.EmptyCartImg}/>
-                    <div className={S.EmptyCartText1}>购物车竟然是空的！</div>
-                    <div className={S.EmptyCartText2}>再忙，也要记得买点什么犒劳自己~</div>
-                </div>}
-                <Button className={S.addressButton} onClick={CreateAddressModal} type="primary">添加收货地址</Button>
-            </div>
-        </div>
+                </div>
+
+                <div className={S.address}>
+                    {ShowAddresses ? (ShowAddresses.map((item) => (<div className={S.addressItem} key={item.id}>
+                        <div className={S.itemProfile}>
+                            <span>{item.name}&nbsp;,</span>
+                            <span className={S.itemTelephone}>{item.phone}</span>
+                            <span className={S.itemDelete} onClick={() => delectAddress(item.id)}>X</span>
+
+                            <p>{item.address}</p>
+                        </div>
+                        <div className={S.itemButton}>
+                            <div className={S.default}></div>
+                            <div className={S.selectButton}>
+                                <Button className={S.updateButton}
+                                        onClick={() => UpdateAddressModal(true, item.id, item.name, item.phone)}
+                                        type="primary">修改</Button>
+                            </div>
+                        </div>
+                    </div>))) : <div className={S.EmptyCart}>
+                        {/* 此处的图片不能直接写路径，只能通过import的方式将它引入进来 */}
+                        <img src={emptyCart} alt="" className={S.EmptyCartImg}/>
+                        <div className={S.EmptyCartText1}>购物车竟然是空的！</div>
+                        <div className={S.EmptyCartText2}>再忙，也要记得买点什么犒劳自己~</div>
+                    </div>}
+                    <Button className={S.addressButton} onClick={CreateAddressModal} type="primary">添加收货地址</Button>
+                </div>
+            </div> :                 // 用户没登录就显示
+            <div className={S.Empty}>
+                <Empty
+                    image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                    imageStyle={{
+                        height: 160,
+                    }}
+                    description={<span>你还没有 <a href="/">登录？</a></span>}>
+                    <Button type="primary" onClick={() => {
+                        navigateTo("/login")
+                    }}>点击登录</Button>
+                </Empty>
+            </div>}
+
 
         {/* 添加收货地址models虚拟栏 */}
         <Modal title="添加收货地址" centered={true} open={isCreateAddressModalOpen} onOk={CreateAddress}
@@ -271,5 +283,7 @@ export default function UserAddress() {
                 </div>)}
             </div>
         </Drawer>
+
+
     </>)
 }

@@ -181,4 +181,11 @@
   padding-bottom: 10px;
   border-bottom: 3px solid #ccc;
 }
+.Empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding-bottom: 10vh;
+}
 /*# sourceMappingURL=index.module.css.map */

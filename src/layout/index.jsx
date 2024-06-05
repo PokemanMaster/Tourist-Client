@@ -30,7 +30,8 @@ export default function LayoutView() {
                         <Menu.Item key="/layout/personal/center" onClick={() => navigateTo('/layout/personal/center')}>
                             我的个人中心
                         </Menu.Item>
-                        <Menu.Item key="/layout/personal/favorite" onClick={() => navigateTo('/layout/personal/favorite')}>
+                        <Menu.Item key="/layout/personal/favorite"
+                                   onClick={() => navigateTo('/layout/personal/favorite')}>
                             我的收藏
                         </Menu.Item>
                         <Menu.Item key="/layout/personal/order" onClick={() => navigateTo('/layout/personal/order')}>
@@ -45,9 +46,9 @@ export default function LayoutView() {
                         <Menu.Item key="/layout/user/details" onClick={() => navigateTo('/layout/user/details')}>
                             个人信息
                         </Menu.Item>
-                        <Menu.Item key="/layout/user/pass" onClick={() => navigateTo('/layout/user/pass')}>
-                            修改密码
-                        </Menu.Item>
+                        {/*<Menu.Item key="/layout/user/pass" onClick={() => navigateTo('/layout/user/pass')}>*/}
+                        {/*    修改密码*/}
+                        {/*</Menu.Item>*/}
                         <Menu.Item key="/layout/user/address" onClick={() => navigateTo('/layout/user/address')}>
                             收货地址
                         </Menu.Item>

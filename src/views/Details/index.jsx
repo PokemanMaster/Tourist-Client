@@ -119,20 +119,10 @@ export default function Details() {
                         </Col>
                     </Row>
                 </div>
-
-
-                {/*<Row>*/}
-                {/*    /!*描述模块*!/*/}
-                {/*    <Col xs={24} sm={24} md={24} lg={24} xl={24}>*/}
-                {/*        <div className={AA.description}>*/}
-                {/*            <img src={product.info} alt=""/>*/}
-                {/*        </div>*/}
-                {/*    </Col>*/}
-                {/*</Row>*/}
             </div>
         </div> : null}
 
-        <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
             <p>{Message}</p>
         </Modal>
     </>)

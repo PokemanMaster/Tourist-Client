@@ -78,7 +78,7 @@
   font-size: 25px;
   font-weight: 700;
 }
-.EmptyCart {
+.Favorite .EmptyCart {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,18 +86,25 @@
   height: 100%;
   margin: 20vh auto;
 }
-.EmptyCart .EmptyCartImg {
+.Favorite .EmptyCart .EmptyCartImg {
   height: 5.7rem;
   width: 5.7rem;
 }
-.EmptyCart .EmptyCartText1 {
+.Favorite .EmptyCart .EmptyCartText1 {
   font-size: 1.7rem;
   color: #666;
   padding: 0.7rem 0;
 }
-.EmptyCart .EmptyCartText2 {
+.Favorite .EmptyCart .EmptyCartText2 {
   color: #888;
   font-size: 0.7rem;
   margin-bottom: 0.7rem;
+}
+.Empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding-bottom: 10vh;
 }
 /*# sourceMappingURL=index.module.css.map */

@@ -8,7 +8,6 @@ if (user && user.id) {
     UserId = user.id;
 }
 
-
 const api = {
     UserToken: "/api/v1/ping", // 检测用户token
     Register: "api/v1/user/register", // 用户注册
