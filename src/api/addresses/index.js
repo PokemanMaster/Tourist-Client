@@ -8,50 +8,41 @@ if (user && user.id) {
     UserId = user.id;
 }
 
-const api = {
-    CreateAddress: "api/v1/addresses", // 创建收货地址
-    ShowAddresses: `api/v1/addresses/${UserId}`, // 展示收货地址
-    UpdateAddress: "api/v1/addresses", // 修改收货地址
-    DeleteAddress: "api/v1/addresses", // 删除收货地址
+// 创建收货地址
+export const CreateAddressAPI = (data) => {
+    return request("api/v1/addresses", {
+        method: 'post', data: data, headers: {
+            'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json',
+        },
+    });
 };
 
-// 收货地址
-export const CreateAddressAPI = (data) => {
-    return request(api.CreateAddress, {
-        method: 'post',
-        data: data,
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-        },
-    });
-};
+
+// 展示收货地址
 export const ShowAddressesAPI = () => {
-    return request(api.ShowAddresses, {
-        method: 'get',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+    return request(`api/v1/addresses/${UserId}`, {
+        method: 'get', headers: {
+            'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json',
         },
     });
 };
+
+
+// 修改收货地址
 export const UpdateAddressAPI = (data) => {
-    return request(api.UpdateAddress, {
-        method: 'put',
-        data: data,
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+    return request("api/v1/addresses", {
+        method: 'put', data: data, headers: {
+            'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json',
         },
     });
 };
+
+
+// 删除收货地址
 export const DeleteAddressAPI = (data) => {
-    return request(api.DeleteAddress, {
-        method: 'delete',
-        data: data,
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+    return request("api/v1/addresses", {
+        method: 'delete', data: data, headers: {
+            'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json',
         },
     });
 };

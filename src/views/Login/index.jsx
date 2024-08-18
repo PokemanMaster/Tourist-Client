@@ -86,7 +86,10 @@ export default function Login() {
     // 提交处理
     const submitForm = () => {
         LoginAPI({
-            user_name: userName, password: password, code: code, codeId: codeId,
+            "UserName": userName,
+            "Password": password,
+            "Code": code,
+            "CodeId": codeId,
         }).then(res => {
             handleOpen(res.msg)
             localStorage.clear();
@@ -109,143 +112,139 @@ export default function Login() {
         navigateTo("/register")
     }
 
-    return (
-        <div className={s.body}>
-            <Row justify="center" align="top">
-                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                    <h1>模拟商城旅游网</h1>
-                </Col>
-                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                    <p>心态特好&nbsp;&nbsp;&nbsp;从不摆烂</p>
-                </Col>
-            </Row>
-            <Row>
-                <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
-                <Col xs={18} sm={16} md={12} lg={8} xl={6}>
-                    <h2>用户登录</h2>
-                </Col>
-            </Row>
-            {/*用户输入*/}
-            <Row>
-                <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
-                <Col xs={18} sm={16} md={12} lg={8} xl={6}>
-                    <FormControl variant="standard" style={{width: '100%'}}>
-                        <InputLabel htmlFor="standard-adornment-password"
-                                    style={{color: '#3E3F4C'}}>用户名：admin</InputLabel>
-                        <Input
-                            id="standard-adornment-userName"
-                            value={userName}
-                            onChange={handleUserNameChange}
-                            inputProps={{maxLength: 11}} // 限制最大长度为11
-                        />
-                    </FormControl>
-                </Col>
-                <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
-            </Row>
-            {/*密码输入*/}
-            <Row justify="center">
-                <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
-                <Col xs={18} sm={16} md={12} lg={8} xl={6}>
-                    <FormControl variant="standard" style={{width: '100%'}}>
-                        <InputLabel htmlFor="standard-adornment-password"
-                                    style={{color: '#3E3F4C'}}>密码：123456</InputLabel>
-                        <Input
-                            id="standard-adornment-password"
-                            value={password}
-                            onChange={handlePasswordChange}
-                            type={showPassword ? 'text' : 'password'}
-                            inputProps={{maxLength: 20}} // 限制最大长度为11
-                            endAdornment={<InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                >
-                                    {showPassword ? <VisibilityOffIcon/> : <VisibilityIcon/>}
-                                </IconButton>
-                            </InputAdornment>}
-                        />
-                    </FormControl>
-                </Col>
-                <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
-            </Row>
-            {/*验证码*/}
-            <Row>
-                <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
-                <Col xs={18} sm={16} md={12} lg={8} xl={6}>
-                    <FormControl sx={{display: 'flex', flexDirection: 'row', width: '100%'}} variant="standard">
-                        <InputLabel htmlFor="standard-code"
-                                    style={{color: '#3E3F4C', paddingTop: '7px'}}>验证码</InputLabel>
-                        <Input
-                            id="standard-code"
-                            value={code}
-                            inputProps={{maxLength: 5}} // 限制最大长度为11
-                            onChange={handleCodeChange}
-                            variant="standard"
-                            fullWidth
-                        />
-                        <img onClick={changeCategory} src={base64} style={{width: '40%'}} alt=""/>
-                    </FormControl>
-                </Col>
-                <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
-            </Row>
-            {/*提交*/}
-            <Row>
-                <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
-                <Col xs={18} sm={16} md={12} lg={8} xl={6}>
-                    <Button variant="contained" style={{width: '100%'}}
-                            onClick={submitForm}>登录</Button>
-                </Col>
-                <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
-            </Row>
-            {/*遗忘处理*/}
-            <Row style={{textAlign: 'center'}}>
-                <Col xs={6} sm={6} md={6} lg={8} xl={10} style={{textAlign: 'right'}}>
-                </Col>
-                <Col xs={12} sm={12} md={12} lg={8} xl={4}>
-                </Col>
-                <Col xs={6} sm={6} md={6} lg={8} xl={10} style={{textAlign: 'left', cursor: 'pointer'}}>
-                    <div
-                        style={{
-                            color: 'blue',
-                            fontWeight: '700',
-                            fontSize: '18px' // 你可以根据需要调整大小
-                        }}
-                        onClick={toRegister}
-                    >
-                        点击注册
-                    </div>
-                </Col>
-            </Row>
-
-            <Row style={{textAlign: 'center'}}>
-                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                    <MuiLink href="https://beian.miit.gov.cn/" underline="none" style={{color: "#333"}}>
-                        桂ICP备2023004200号-2
-                    </MuiLink>
-                </Col>
-            </Row>
-
-
-            {/*弹出层*/}
-            <div>
-                {/*npm install react-modal*/}
-                <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
+    return (<div className={s.body}>
+        <Row justify="center" align="top">
+            <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                <h1>模拟商城旅游网</h1>
+            </Col>
+            <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                <p>心态特好&nbsp;&nbsp;&nbsp;从不摆烂</p>
+            </Col>
+        </Row>
+        <Row>
+            <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
+            <Col xs={18} sm={16} md={12} lg={8} xl={6}>
+                <h2>用户登录</h2>
+            </Col>
+        </Row>
+        {/*用户输入*/}
+        <Row>
+            <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
+            <Col xs={18} sm={16} md={12} lg={8} xl={6}>
+                <FormControl variant="standard" style={{width: '100%'}}>
+                    <InputLabel htmlFor="standard-adornment-password"
+                                style={{color: '#3E3F4C'}}>用户名：admin</InputLabel>
+                    <Input
+                        id="standard-adornment-userName"
+                        value={userName}
+                        onChange={handleUserNameChange}
+                        inputProps={{maxLength: 11}} // 限制最大长度为11
+                    />
+                </FormControl>
+            </Col>
+            <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
+        </Row>
+        {/*密码输入*/}
+        <Row justify="center">
+            <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
+            <Col xs={18} sm={16} md={12} lg={8} xl={6}>
+                <FormControl variant="standard" style={{width: '100%'}}>
+                    <InputLabel htmlFor="standard-adornment-password"
+                                style={{color: '#3E3F4C'}}>密码：123456</InputLabel>
+                    <Input
+                        id="standard-adornment-password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                        type={showPassword ? 'text' : 'password'}
+                        inputProps={{maxLength: 20}} // 限制最大长度为11
+                        endAdornment={<InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                            >
+                                {showPassword ? <VisibilityOffIcon/> : <VisibilityIcon/>}
+                            </IconButton>
+                        </InputAdornment>}
+                    />
+                </FormControl>
+            </Col>
+            <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
+        </Row>
+        {/*验证码*/}
+        <Row>
+            <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
+            <Col xs={18} sm={16} md={12} lg={8} xl={6}>
+                <FormControl sx={{display: 'flex', flexDirection: 'row', width: '100%'}} variant="standard">
+                    <InputLabel htmlFor="standard-code"
+                                style={{color: '#3E3F4C', paddingTop: '7px'}}>验证码</InputLabel>
+                    <Input
+                        id="standard-code"
+                        value={code}
+                        inputProps={{maxLength: 5}} // 限制最大长度为11
+                        onChange={handleCodeChange}
+                        variant="standard"
+                        fullWidth
+                    />
+                    <img onClick={changeCategory} src={base64} style={{width: '40%'}} alt=""/>
+                </FormControl>
+            </Col>
+            <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
+        </Row>
+        {/*提交*/}
+        <Row>
+            <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
+            <Col xs={18} sm={16} md={12} lg={8} xl={6}>
+                <Button variant="contained" style={{width: '100%'}}
+                        onClick={submitForm}>登录</Button>
+            </Col>
+            <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
+        </Row>
+        {/*遗忘处理*/}
+        <Row style={{textAlign: 'center'}}>
+            <Col xs={6} sm={6} md={6} lg={8} xl={10} style={{textAlign: 'right'}}>
+            </Col>
+            <Col xs={12} sm={12} md={12} lg={8} xl={4}>
+            </Col>
+            <Col xs={6} sm={6} md={6} lg={8} xl={10} style={{textAlign: 'left', cursor: 'pointer'}}>
+                <div
+                    style={{
+                        color: 'blue', fontWeight: '700', fontSize: '18px' // 你可以根据需要调整大小
+                    }}
+                    onClick={toRegister}
                 >
-                    <Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Text in a modal
-                        </Typography>
-                        <Typography id="modal-modal-description" sx={{mt: 2}}>
-                            {message}
-                        </Typography>
-                    </Box>
-                </Modal>
-            </div>
+                    点击注册
+                </div>
+            </Col>
+        </Row>
+
+        <Row style={{textAlign: 'center'}}>
+            <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                <MuiLink href="https://beian.miit.gov.cn/" underline="none" style={{color: "#333"}}>
+                    桂ICP备2023004200号-2
+                </MuiLink>
+            </Col>
+        </Row>
+
+
+        {/*弹出层*/}
+        <div>
+            {/*npm install react-modal*/}
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Text in a modal
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{mt: 2}}>
+                        {message}
+                    </Typography>
+                </Box>
+            </Modal>
         </div>
-    )
+    </div>)
 }

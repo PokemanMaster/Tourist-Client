@@ -3,10 +3,10 @@ import AA from "./index.module.css"
 import {Button, Col, Drawer, Row} from "antd";
 import {useLocation, useNavigate} from "react-router-dom";
 import {ShowAddressesAPI} from "../../api/addresses";
-import {CreateOrderAPI, ShowOrderAPI} from "../../api/orders"
+import { ListOrdersAPI} from "../../api/orders"
 import S from "../UserAddress/index.module.css";
 import emptyCart from "../../public/images/cart_empty.png";
-import {cityData} from "../../data/city";
+import {CreatePayAPI} from "../../api/pay";
 
 export default function OrderDetails() {
     const navigateTo = useNavigate()
@@ -15,9 +15,23 @@ export default function OrderDetails() {
     // 地址
     const [address, setAddress] = useState("");
     const [addressData, setAddressData] = useState([]);
+    const [order, setOrder] = useState([]);
+
     useEffect(() => {
         ShowAddressesAPI().then(res => {
-            setAddress(res.data[0])
+            setAddress(res.data[0]);
+        }).catch(err => {
+            console.log(err);
+        });
+
+        ListOrdersAPI().then(res => {
+            const items = res.data.items;
+            // 使用 reduce 找到 created_time 最大的那一项数据
+            const maxCreatedTimeItem = items.reduce((maxItem, currentItem) =>
+                    currentItem.created_time > maxItem.created_time ? currentItem : maxItem
+                , items[0]);
+            setOrder(maxCreatedTimeItem);
+            // 你可以在这里设置状态或进一步处理 maxCreatedTimeItem
         }).catch(err => {
             console.log(err);
         });
@@ -28,12 +42,21 @@ export default function OrderDetails() {
     const cart = location.state.Cart
     const WeChatPay = () => {
         console.log(cart)
-        CreateOrderAPI({
-            "user_id": cart.user_id,
-            "product_id": cart.product_id,
-            "num": cart.num,
-            "address_id": address.id
+        CreatePayAPI({
+            "ProductID": cart.product_id,
+            "Code" : order.code,
+            "UserID": cart.user_id,
+            "OrderID": order.id,
+            "QAID": 1,
+            "DEID": 1,
+            "PostID": 1,
+            "Price": cart.price,
+            "AddressID": address.id,
+            "ECP": 1,
+            "PaymentType": 3,
+            "Status": 2,
         }).then(res => {
+            console.log(res)
             navigateTo(`/layout/personal/order/`)
         }).catch(err => {
             console.log(err)

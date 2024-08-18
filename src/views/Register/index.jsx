@@ -44,14 +44,7 @@ export default function Register() {
     }
 
 
-    // nickname处理
-    const [nickname, setNickname] = useState('');
-    const handleNicknameChange = (event) => {
-        setNickname(event.target.value);
-    };
-
-
-    // name处理
+    // userName处理
     const [name, setName] = useState('');
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -100,11 +93,10 @@ export default function Register() {
     // 提交处理
     const submitForm = () => {
         RegisterAPI({
-            "nickname": nickname,
-            "user_name": name,
-            "password": password,
-            "code": code,
-            "codeId": codeId,
+            "UserName": name,
+            "Password": password,
+            "Code": code,
+            "CodeId": codeId,
         }).then(res => {
             handleOpen(res.msg)
             if (res.msg === "ok") {
@@ -135,23 +127,6 @@ export default function Register() {
                 </Col>
             </Row>
 
-            {/*nickname输入*/}
-            <Row>
-                <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
-                <Col xs={18} sm={16} md={12} lg={8} xl={6}>
-                    <FormControl variant="standard" style={{width: '100%'}}>
-                        <InputLabel htmlFor="standard-adornment-password"
-                                    style={{color: '#3E3F4C'}}>昵称</InputLabel>
-                        <Input
-                            id="standard-adornment-nickname"
-                            value={nickname}
-                            onChange={handleNicknameChange}
-                            inputProps={{maxLength: 11}} // 限制最大长度为11
-                        />
-                    </FormControl>
-                </Col>
-                <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>
-            </Row>
             {/*用户输入*/}
             <Row>
                 <Col xs={3} sm={4} md={6} lg={8} xl={9}></Col>

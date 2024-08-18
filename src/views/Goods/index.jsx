@@ -3,67 +3,62 @@ import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {Col, Row} from "antd";
 import Search from "antd/es/input/Search";
-import {ListProductsAPI,} from "../../api/products";
-import {ListCategoriesAPI} from "../../api/categories"
-import {SearchProductsAPI} from "../../api/products"
-import {ListRankingAPI} from "../../api/ranking";
+import {ListCategoriesAPI, ListProductsAPI, ListProductsParamsAPI} from "../../api/products";
+import {SearchProductsAPI} from "../../api/products";
+import {ListRankingAPI} from "../../api/rankings";
 import {Link as MuiLink} from "@mui/material";
 
 // 商品分类页
 export default function Goods() {
     const navigateTo = useNavigate();
+
     // 商品列表 ListProducts
     const [ListProducts, setListProducts] = useState([]);
     useEffect(() => {
-        ListProductsAPI().then(res => {
+        ListProductsParamsAPI().then(res => {
+            // console.log("商品列表", res.data);
             setListProducts(res.data.items);
         }).catch(err => {
-            console.error(err)
-        })
+            console.error(err);
+        });
     }, []);
-
 
     // 分类列表 Categories
     const [ListCategories, setListCategories] = useState([]);
     useEffect(() => {
-        ListCategoriesAPI()
-            .then((res) => {
-                setListCategories(res.data);
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    }, [])
-
+        ListCategoriesAPI().then(res => {
+            // console.log("分类列表", res.data);
+            setListCategories(res.data);
+        }).catch(err => {
+            console.error(err);
+        });
+    }, []);
 
     // 排行榜
     const [activeTab, setActiveTab] = useState(0);
     const GetRanking = () => {
         ListRankingAPI().then(res => {
-            setActiveTab(1)
-            setListCategoriesSelect(999)
-            setListProducts(res.data)
+            setActiveTab(1);
+            setListCategoriesSelect(999);
+            setListProducts(res.data);
         }).catch(err => {
-            console.log(err)
-        })
-    }
-
+            console.log(err);
+        });
+    };
 
     // 点击分类列表展示不同的类型商品
-    // 0：推荐、1：食品、2：水果、3：男装、4：电脑、5:医药
     const [ListCategoriesSelect, setListCategoriesSelect] = useState(0);
     const ListCategoriesSelectFunc = (category_id) => {
-        setActiveTab(0)
+        setActiveTab(0);
         category_id = parseInt(category_id, 10);
-        setListCategoriesSelect(category_id)
+        setListCategoriesSelect(category_id);
         // 根据不同的category_id展示不同的商品
         ListProductsAPI({"category_id": category_id}).then(res => {
             setListProducts(res.data.items);
         }).catch(err => {
-            console.error(err)
-        })
-    }
-
+            console.error(err);
+        });
+    };
 
     // 商品详情 ShowProduct
     function ShowProduct(value) {
@@ -75,8 +70,8 @@ export default function Goods() {
         SearchProductsAPI({"search": value}).then(res => {
             setListProducts(res.data);
         }).catch(err => {
-            console.log(err)
-        })
+            console.log(err);
+        });
     }
 
     return (
@@ -103,10 +98,10 @@ export default function Goods() {
                             {ListCategories ? (ListCategories.map((item) => (
                                 <li
                                     key={item.id}
-                                    onClick={() => ListCategoriesSelectFunc(item.category_id)}
-                                    className={ListCategoriesSelect === item.category_id ? S.active : ''}
+                                    onClick={() => ListCategoriesSelectFunc(item.id)}
+                                    className={ListCategoriesSelect === item.id ? S.active : ''}
                                 >
-                                    {item.category_name}
+                                    {item.name}
                                 </li>
                             ))) : <div></div>}
                             <li onClick={GetRanking} className={activeTab === 1 ? S.active : ''}>总榜</li>
@@ -115,27 +110,31 @@ export default function Goods() {
                 </Col>
             </Row>
             {/* 商品 */}
-
             <div className={S.Products}>
                 <Row>
-                    {ListProducts ? (
-                        ListProducts.map((item) => (
+                    {ListProducts ? (ListProducts.map((item) => {
+                        // 解析 images 字段
+                        const facade = JSON.parse(item.images).facade || [];
+                        return (
                             <Col xs={12} sm={8} md={6} lg={4} xl={3} key={item.id}>
                                 <div
                                     onClick={() => ShowProduct(item)}
                                     className={S.Product}
                                 >
                                     <div className={S.ProductImage}>
-                                        <img src={item.img_path} alt={"loading..."}/>
+                                        {/* 渲染 facade 图片 */}
+                                        {facade.map((url, index) => (
+                                            <img key={index} src={url} alt={""}/>
+                                        ))}
                                     </div>
                                     <div className={S.ProductIntroduce}>
-                                        <div className={S.ProductIntroduceName}>{item.name}</div>
+                                        <div className={S.ProductIntroduceName}>{item.title}</div>
                                         <div className={S.ProductIntroduceValue}>¥{item.price}</div>
                                     </div>
                                 </div>
                             </Col>
-                        ))
-                    ) : null}
+                        );
+                    })) : null}
                 </Row>
             </div>
             <Row style={{textAlign: 'center'}}>

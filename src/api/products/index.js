@@ -3,69 +3,57 @@ import request from '../index'
 
 const token = localStorage.getItem("token");
 
-const api = {
-    CreateProduct: "api/v1/products", // 创建商品
-    ListProducts: "api/v1/products", // 商品列表接口
-    ShowProduct: "api/v1/products/:id", // 点击商品进入详情页
-    UpdateProduct: "api/v1/products", // 更新商品的接口
-    DeleteProduct: "api/v1/products/:id", // 删除商品的接口
-    SearchProducts: "api/v1/searches", // 搜索商品的接口
-};
 
-
-// 商品
-export const CreateProductAPI = (data) => {
-    return request(api.CreateProduct, {
-        method: 'post',
-        data: data,
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+// 获取所有商品分类
+export const ListCategoriesAPI = () => {
+    return request("/api/v1/products/categories", {
+        method: 'get', headers: {
+            'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json',
         },
     });
 };
-export const ListProductsAPI = (params) => {
-    return request(api.ListProducts, {
-        method: 'get',
-        params: params,
+
+// 获取所有商品分类
+export const ListProductsAPI = () => {
+    return request("/api/v1/products", {
+        method: 'get', headers: {
+            'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json',
+        },
     });
 };
+
+// 获取某个商品详情
 export const ShowProductAPI = (id) => {
     return request(`/api/v1/products/${id}`, {
-        method: 'get',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+        method: 'get', headers: {
+            'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json',
         },
     });
 };
-export const UpdateProductAPI = (data) => {
-    return request(api.UpdateProduct, {
-        method: 'post',
-        data: data,
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+
+// 获取所有商品图片参数 (首页展示的商品图片)
+export const ListProductsParamsAPI = (params) => {
+    return request("api/v1/products/param", {
+        method: 'get', params: params,
+    });
+};
+
+
+// 获取某个商品参数 (点击商品进入详情页)
+export const ShowProductParamAPI = (id) => {
+    return request(`/api/v1/products/${id}/param`, {
+        method: 'get', headers: {
+            'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json',
         },
     });
 };
-export const DeleteProductAPI = (data) => {
-    return request(api.DeleteProduct, {
-        method: 'post',
-        data: data,
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-        },
-    });
-};
+
+
+// 搜索商品的接口
 export const SearchProductsAPI = (data) => {
-    return request(api.SearchProducts, {
-        method: 'post',
-        data: data,
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+    return request("api/v1/searches", {
+        method: 'post', data: data, headers: {
+            'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json',
         },
     });
 };

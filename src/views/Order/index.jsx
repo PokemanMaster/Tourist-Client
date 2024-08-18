@@ -17,6 +17,7 @@ export default function Order() {
         if (UserInfo) {
             // 获取商品列表
             ListOrdersAPI(UserInfo.id).then((res) => {
+                console.log(res.data.items)
                 setOrder(res.data.items);
             });
         }
@@ -24,9 +25,16 @@ export default function Order() {
 
     // 跳转到订单详情
     function ViewTheOrder(orderNum) {
+        console.log(orderNum)
         navigateTo(`/layout/order/confirm/${orderNum}`, {
             state: {orderNum: orderNum}
         })
+    }
+
+    // 解析 JSON 格式图片
+    function JsonParseFacade(value) {
+        const parsedValue = JSON.parse(value); // 解析 JSON 字符串
+        return parsedValue.facade
     }
 
 
@@ -50,13 +58,13 @@ export default function Order() {
                                 <Col xs={7} sm={6} md={6} lg={6} xl={4}>
                                     {/* 商品图片 */}
                                     <div className={S.carItemPicture}>
-                                        <img src={item.img_path} alt=""/>
+                                        <img src={JsonParseFacade(item.images)} alt=""/>
                                     </div>
                                 </Col>
                                 <Col xs={14} sm={6} md={6} lg={6} xl={8}>
                                     {/* 商品介绍 */}
                                     <div className={S.carItemIntroduce}>
-                                        <span>{item.name}</span>
+                                        <span>{item.title}</span>
                                     </div>
                                 </Col>
                             </div>
@@ -67,7 +75,7 @@ export default function Order() {
                                 <Col xs={7} sm={7} md={7} lg={7} xl={7}>
                                     {/* 商品金额 */}
                                     <div className={S.CarItemMoney}>
-                                        <span>{(item.discount_price * item.num).toFixed(2)}</span>
+                                        <span>{(item.actualPrice * item.num).toFixed(2)}</span>
                                     </div>
                                 </Col>
                                 <Col xs={7} sm={7} md={7} lg={7} xl={7}>
@@ -77,7 +85,7 @@ export default function Order() {
                                         danger
                                         ghost
                                         className={S.CarItemButton}
-                                        onClick={() => ViewTheOrder(item.order_num)}
+                                        onClick={() => ViewTheOrder(item.code)}
                                     >
                                         查看订单
                                     </Button>

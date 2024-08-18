@@ -7,7 +7,7 @@ import {ShowFavoritesAPI} from "../../api/favorites";
 
 export default function Center() {
 
-    const [UserInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem("user")));
+    const [UserInfo] = useState(JSON.parse(localStorage.getItem("user")));
     const navigateTo = useNavigate()
     const [OrderNum, setOrderNum] = useState(0)
     const [FavoritesNum, setFavoritesNum] = useState(0)
@@ -16,14 +16,13 @@ export default function Center() {
     useEffect(() => {
         if (UserInfo) {
             ListOrdersAPI().then(res => {
-                if (res.data.items.length > 0) {
-                    setOrderNum(res.data.items.length);
-                }
-            });
+                setOrderNum(res.data.items.length);
+            }).catch(err => {
+                console.log(err)});
             ShowFavoritesAPI().then(res => {
-                if (res.data.items.length > 0) {
-                    setFavoritesNum(res.data.items.length);
-                }
+                setFavoritesNum(res.data.items.length);
+            }).catch(err => {
+                console.log(err)
             });
         }
     }, [UserInfo]);
@@ -43,10 +42,10 @@ export default function Center() {
                                     <p style={{
                                         fontSize: '25px', fontWeight: 100, color: '#464547'
                                     }}>{UserInfo.nickname}</p>
-                                    <p><a onClick={() => {
+                                    <p><i onClick={() => {
                                         navigateTo("/layout/user/details")
                                     }}
-                                          style={{fontSize: '13px', color: '#ff6700'}}>修改个人信息 &gt;</a></p>
+                                          style={{fontSize: '13px', color: '#ff6700'}}>修改个人信息 &gt;</i></p>
                                 </div>
                             </div>
                         </Col>
@@ -62,8 +61,8 @@ export default function Center() {
                                     <ul>
                                         <li>普通</li>
                                         <li>
-                                            {"" === '1' ? (<span>点此<a>绑定邮箱</a></span>) : (
-                                                <span>{UserInfo.email}<a>『解除绑定』</a></span>)}
+                                            {"" === '1' ? (<span>点此<i>绑定邮箱</i></span>) : (
+                                                <span>{UserInfo.email}<i>『解除绑定』</i></span>)}
                                         </li>
                                     </ul>
                                 </div>

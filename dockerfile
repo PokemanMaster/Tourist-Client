@@ -1,25 +1,22 @@
-# 使用基础的Node.js镜像
-FROM node:18.16.0
+FROM node:18.16.0 as build
 
-# 设置工作目录
 WORKDIR /app
 
-# 复制package.json和package-lock.json文件到工作目录
-COPY package*.json ./
+COPY package.json .
+RUN yarn install
 
-# 安装项目依赖
-RUN yarn
-
-# 复制项目文件到工作目录
 COPY . .
 
-# 构建项目
-ENV NODE_ENV production
 RUN yarn build
 
+FROM nginx
 
-# 暴露React应用程序的默认端口
-EXPOSE 3000
+RUN mkdir /app
 
-# 启动应用程序
-CMD ["yarn", "start"]
+# Copy the conf and content to docker host
+COPY --from=build /app/build /app
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

@@ -20,15 +20,17 @@ export default function UserAddress() {
             console.log("展示收货地址信息", res)
             setShowAddresses(res.data)
         }).catch(err => {
+            console.log(err)
         });
     }, [])
 
     // 删除收货地址
     const delectAddress = (id) => {
-        DeleteAddressAPI({"address_id": id})
+        DeleteAddressAPI({"AddressID": id})
             .then(res => {
                 console.log("删除收货地址", res)
             }).catch(err => {
+            console.log(err)
         })
         window.location.reload();
     }
@@ -48,7 +50,7 @@ export default function UserAddress() {
             const addressValue = drawerValue + '-' + detailsValue;
             // 添加收货地址
             CreateAddressAPI({
-                "user_id": UserInfo.id, "name": addressesValue, "phone": telephoneValue, "address": addressValue
+                "UserID": UserInfo.id, "Name": addressesValue, "Telephone": telephoneValue, "Address": addressValue
             }).then(res => {
                 console.log("添加收货地址", res)
             }).catch(err => {
@@ -79,11 +81,12 @@ export default function UserAddress() {
             const addressValue = drawerValue + '-' + detailsValue;
             // 添加收货地址
             UpdateAddressAPI({
-                "user_id": UserInfo.id,
-                "id": UpdateAddressId,
-                "name": addressesValue,
-                "phone": telephoneValue,
-                "address": addressValue
+                "UserID": UserInfo.id,
+                "ID": UpdateAddressId,
+                "Name": addressesValue,
+                "Telephone": telephoneValue,
+                "Address": addressValue,
+                "Prime" : false,
             }).then(res => {
                 console.log("添加收货地址", res)
             }).catch(err => {
@@ -163,9 +166,8 @@ export default function UserAddress() {
                     {ShowAddresses ? (ShowAddresses.map((item) => (<div className={S.addressItem} key={item.id}>
                         <div className={S.itemProfile}>
                             <span>{item.name}&nbsp;,</span>
-                            <span className={S.itemTelephone}>{item.phone}</span>
+                            <span className={S.itemTelephone}>{item.Telephone}</span>
                             <span className={S.itemDelete} onClick={() => delectAddress(item.id)}>X</span>
-
                             <p>{item.address}</p>
                         </div>
                         <div className={S.itemButton}>
@@ -179,8 +181,8 @@ export default function UserAddress() {
                     </div>))) : <div className={S.EmptyCart}>
                         {/* 此处的图片不能直接写路径，只能通过import的方式将它引入进来 */}
                         <img src={emptyCart} alt="" className={S.EmptyCartImg}/>
-                        <div className={S.EmptyCartText1}>购物车竟然是空的！</div>
-                        <div className={S.EmptyCartText2}>再忙，也要记得买点什么犒劳自己~</div>
+                        <div className={S.EmptyCartText1}>收货地址竟然是空的！</div>
+                        <div className={S.EmptyCartText2}>赶紧创建一个收货地址把</div>
                     </div>}
                     <Button className={S.addressButton} onClick={CreateAddressModal} type="primary">添加收货地址</Button>
                 </div>
